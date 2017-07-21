@@ -12,9 +12,6 @@ buildscript {
 
     repositories {
         jcenter()
-        maven {
-            url 'http://dl.bintray.com/lapis-mc/minecraft'
-        }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -29,6 +26,9 @@ apply plugin: 'com.jfrog.bintray'
 
 repositories {
     jcenter()
+    maven {
+        url 'http://dl.bintray.com/lapis-mc/minecraft'
+    }
 }
 
 dependencies {
