@@ -1,4 +1,4 @@
-group 'com.lapismc.lapis.launcher
+group 'com.lapismc.lapis.launcher'
 version '0.5.0'
 
 buildscript {
