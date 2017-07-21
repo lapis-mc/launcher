@@ -1,0 +1,18 @@
+group 'com.lapismc.lapis.launcher'
+version '0.5.0'
+
+dependencies {
+    compile "com.github.kittinunf.fuel:fuel:$fuel_version"
+    compile "com.github.kittinunf.fuel:fuel-gson:$fuel_version"
+    compile "com.lapismc.minecraft:minecraft-versioning:$mcv_version"
+}
+
+publishing.publications.all {
+    pom.withXml {
+        asNode().dependencies.'*'.findAll() {
+            it.scope.text() == 'runtime' && project.configurations.compile.allDependencies.find { dep ->
+                dep.name == it.artifactId.text()
+            }
+        }.each { it.scope*.value = 'compile'}
+    }
+}
