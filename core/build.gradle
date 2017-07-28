@@ -5,6 +5,7 @@ dependencies {
     compile "com.github.kittinunf.fuel:fuel:$fuel_version"
     compile "com.github.kittinunf.fuel:fuel-gson:$fuel_version"
     compile "com.lapismc.minecraft:minecraft-versioning:$mcv_version"
+    compile "com.lapismc.minecraft:yggdrasil:$ygg_version"
 }
 
 publishing.publications.all {
