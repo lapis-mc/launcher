@@ -4,6 +4,7 @@ buildscript {
         fuel_version    = '1.9.0'
         mcv_version     = '0.5.0'
         ygg_version     = '0.5.0'
+        oshi_version    = '3.4.3'
         dokka_version   = '0.9.15'
         bintray_version = '1.7.3'
     }

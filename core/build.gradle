@@ -6,6 +6,7 @@ dependencies {
     compile "com.github.kittinunf.fuel:fuel-gson:$fuel_version"
     compile "com.lapismc.minecraft:minecraft-versioning:$mcv_version"
     compile "com.lapismc.minecraft:yggdrasil:$ygg_version"
+    compile "com.github.oshi:oshi-core:$oshi_version"
 }
 
 publishing.publications.all {
