@@ -10,10 +10,28 @@ import oshi.SystemInfo
  * @param is64bit Flag indicating whether Java is 64-bit.
  */
 data class SystemJava(val version: String, val path: String, val is64bit: Boolean) {
+    companion object {
+        /**
+         * Retrieves the running Java version.
+         * @return Information about the Java running this program.
+         */
+        fun current(): SystemJava {
+            val version = System.getProperty("java.runtime.version")
+            val path    = System.getProperty("java.home")
+            val is64bit = System.getProperty("sun.arch.data.model") == "64"
+            return SystemJava(version, path, is64bit)
+        }
+    }
+
     /**
      * Bytes in a gigabyte, used to syntactical conversion.
      */
     private val GB = (1024 * 1024 * 1024).toLong()
+
+    /**
+     * Path to the executable to run Java.
+     */
+    val executable: String = TODO()
 
     /**
      * Calculates the maximum amount of memory this installation of Java can use.
