@@ -18,7 +18,7 @@ data class SystemJava(val version: String, val path: String, val is64bit: Boolea
         fun current(): SystemJava {
             val version = System.getProperty("java.runtime.version")
             val path    = System.getProperty("java.home")
-            val is64bit = System.getProperty("sun.arch.data.model") == "64"
+            val is64bit = System.getProperty("os.arch").endsWith("64")
             return SystemJava(version, path, is64bit)
         }
     }
