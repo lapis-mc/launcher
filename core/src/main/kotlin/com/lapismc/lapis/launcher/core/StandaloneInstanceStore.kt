@@ -8,4 +8,9 @@ import java.nio.file.spi.FileSystemProvider
  * @param fileSystemProvider Provides access to where the instances are stored to and retrieved from.
  */
 class StandaloneInstanceStore(fileSystemProvider: FileSystemProvider) : InstanceStore(fileSystemProvider) {
+    /**
+     * Adds an asset to the storage.
+     * @param assetArg Asset information and content.
+     */
+    override fun addAsset(assetArg: AssetArg) = TODO()
 }

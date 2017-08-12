@@ -7,4 +7,9 @@ import java.nio.file.spi.FileSystemProvider
  * @param fileSystemProvider Provides access to where the instances are stored to and retrieved from.
  */
 abstract class InstanceStore(protected val fileSystemProvider: FileSystemProvider) {
+    /**
+     * Adds an asset to the storage.
+     * @param assetArg Asset information and content.
+     */
+    abstract fun addAsset(assetArg: AssetArg)
 }
