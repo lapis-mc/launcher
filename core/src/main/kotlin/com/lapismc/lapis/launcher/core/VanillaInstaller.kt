@@ -1,15 +1,14 @@
 package com.lapismc.lapis.launcher.core
 
 /**
- * Capable of installing a vanilla version of Minecraft.
- * @param instance Instance to install.
+ * Base class for all types of game installers.
+ * Sub-classes are responsible for details of installing their type of Minecraft.
+ * @param contentPackage Package to install.
  */
-class VanillaInstaller(instance: Instance) : Installer(instance) {
+abstract class VanillaInstaller(contentPackage: ContentPackage) : Installer(contentPackage) {
     /**
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.
      */
-    override fun install(store: InstanceStore) {
-        installAssets(store)
-    }
+    override fun install(store: InstanceStore) = TODO()
 }
