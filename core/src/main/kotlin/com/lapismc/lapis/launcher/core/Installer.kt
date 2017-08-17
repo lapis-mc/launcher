@@ -11,4 +11,10 @@ abstract class Installer(protected val contentPackage: ContentPackage) {
      * @param store Instance storage to install to.
      */
     abstract fun install(store: InstanceStore)
+
+    /**
+     * Checks that the package is properly installed to the instance storage.
+     * @param store Instance storage to install to.
+     */
+    abstract fun verify(store: InstanceStore)
 }
