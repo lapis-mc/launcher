@@ -8,7 +8,7 @@ import com.lapismc.minecraft.versioning.MetaService
  * @param metaService Service used to retrieve file content.
  * @param contentPackage Package to install.
  */
-abstract class Installer(protected val metaService: MetaService, protected val contentPackage: ContentPackage) {
+abstract class Installer internal constructor(protected val metaService: MetaService, protected val contentPackage: ContentPackage) {
     /**
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.

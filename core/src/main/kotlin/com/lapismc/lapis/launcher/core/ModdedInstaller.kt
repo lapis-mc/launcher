@@ -7,7 +7,7 @@ import com.lapismc.minecraft.versioning.MetaService
  * @param metaService Service used to retrieve file content.
  * @param contentPackage Package to install.
  */
-class ModdedInstaller(metaService: MetaService, contentPackage: ContentPackage) : Installer(metaService, contentPackage) {
+internal class ModdedInstaller(metaService: MetaService, contentPackage: ContentPackage) : Installer(metaService, contentPackage) {
     /**
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.

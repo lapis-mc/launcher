@@ -7,7 +7,7 @@ package com.lapismc.lapis.launcher.core
  * @param size Size of the file in bytes.
  * @param hash SHA-256 digest of the raw content.
  */
-abstract class Content(val name: String, val size: Int, val hash: String) {
+internal abstract class Content(val name: String, val size: Int, val hash: String) {
     /**
      * Writes the content to an instance store.
      * @param instanceStore Storage to write the file to.

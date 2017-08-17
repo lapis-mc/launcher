@@ -4,7 +4,7 @@ package com.lapismc.lapis.launcher.core
  * Collection of content that is needed for an instance to run.
  * @param contents List of content in the package.
  */
-class ContentPackage(private val contents: List<Content>) : Collection<Content> {
+internal class ContentPackage(private val contents: List<Content>) : Collection<Content> {
     /**
      * Number of items in the package.
      */
