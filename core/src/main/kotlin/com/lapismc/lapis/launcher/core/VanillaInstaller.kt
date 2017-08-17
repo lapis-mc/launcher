@@ -13,11 +13,13 @@ internal class VanillaInstaller(metaService: MetaService, private val contentPac
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.
      */
-    override fun install(store: InstanceStore) = TODO()
+    override fun install(store: InstanceStore): InstallResult {
+        return installPackageToStore(contentPackage, store)
+    }
 
     /**
      * Checks that the package is properly installed to the instance storage.
      * @param store Instance storage to install to.
      */
-    override fun verify(store: InstanceStore) = TODO()
+    override fun verify(store: InstanceStore): InstallResult = TODO()
 }

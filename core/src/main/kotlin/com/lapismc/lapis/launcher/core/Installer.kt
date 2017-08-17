@@ -12,21 +12,30 @@ abstract class Installer internal constructor(protected val metaService: MetaSer
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.
      */
-    abstract fun install(store: InstanceStore)
+    abstract fun install(store: InstanceStore): InstallResult
 
     /**
      * Checks that the package is properly installed to the instance storage.
      * @param store Instance storage to install to.
      */
-    abstract fun verify(store: InstanceStore)
+    abstract fun verify(store: InstanceStore): InstallResult
 
     /**
      * Utility method for installing all content in a package to an instance store.
      * @param contentPackage Package to install.
      * @param store Instance storage to install to.
+     * @return Installation results.
      */
-    internal fun installPackageToStore(contentPackage: ContentPackage, store: InstanceStore) {
-        contentPackage.forEach { it.apply(metaService, store) }
+    internal fun installPackageToStore(contentPackage: ContentPackage, store: InstanceStore): InstallResult {
+        val errors = ArrayList<Exception>()
+        contentPackage.forEach {
+            try {
+                it.apply(metaService, store)
+            } catch(e: Exception) {
+                errors.add(e)
+            }
+        }
+        return InstallResult(errors.toList())
     }
 
     /**

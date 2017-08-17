@@ -17,7 +17,7 @@ internal class AssetContent(name: String, size: Int, hash: String) : Content(nam
      */
     override fun apply(metaService: MetaService, store: InstanceStore) {
         val asset = Asset(name, hash, size)
-        val data = metaService.getAssetContent(asset).get() // TODO: Can throw
+        val data  = metaService.getAssetContent(asset).get() // TODO: Can throw
         store.addAsset(this, data)
     }
 
