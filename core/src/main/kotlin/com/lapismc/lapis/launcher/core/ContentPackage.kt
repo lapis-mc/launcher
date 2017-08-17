@@ -2,19 +2,20 @@ package com.lapismc.lapis.launcher.core
 
 /**
  * Collection of content that is needed for an instance to run.
+ * @param contents List of content in the package.
  */
-class ContentPackage : Collection<Content> {
+class ContentPackage(private val contents: List<Content>) : Collection<Content> {
     /**
      * Number of items in the package.
      */
-    override val size: Int = TODO()
+    override val size = contents.size
 
     /**
      * Checks if the specified content is contained in this package.
      * @param element Content to look for.
      * @return True if the package contains the specified content, false otherwise.
      */
-    override fun contains(element: Content): Boolean = TODO()
+    override fun contains(element: Content) = contents.contains(element)
 
     /**
      * Checks if all content in the specified collection are contained in this package.
@@ -22,29 +23,31 @@ class ContentPackage : Collection<Content> {
      * @return True if the package contains everything from [elements],
      *  or false if at least one is missing.
      */
-    override fun containsAll(elements: Collection<Content>): Boolean = TODO()
+    override fun containsAll(elements: Collection<Content>) = contents.containsAll(elements)
 
     /**
      * Checks whether the package has content in it.
      * @return True if the package doesn't have any content in it,
      *  or false if it does have content.
      */
-    override fun isEmpty(): Boolean = TODO()
+    override fun isEmpty() = contents.isEmpty()
 
     /**
      * Creates an iterator that can be used to retrieve each piece of content.
      * @return Content iterator.
      */
-    override fun iterator(): Iterator<Content> = TODO()
+    override fun iterator(): Iterator<Content> = contents.stream().iterator()
 
     /**
      * Helps build a content package.
      */
     class Builder {
+        private val contents = ArrayList<Content>()
+
         /**
          * Creates the package.
          * @return Constructed content package.
          */
-        fun build() : ContentPackage = TODO()
+        fun build() = ContentPackage(contents.toList())
     }
 }
