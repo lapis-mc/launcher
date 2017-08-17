@@ -2,11 +2,12 @@ package com.lapismc.lapis.launcher.core
 
 /**
  * Base class for all files that can be stored (downloaded) for an install.
- * @param source Location of where to get the content (URL).
+ * This class does not contain the actual data, it contains information about it.
+ * @param name Display name of the content.
  * @param size Size of the file in bytes.
  * @param hash SHA-256 digest of the raw content.
  */
-abstract class Content(val source: String, val size: Int, val hash: String) {
+abstract class Content(val name: String, val size: Int, val hash: String) {
     /**
      * Writes the content to an instance store.
      * @param instanceStore Storage to write the file to.
