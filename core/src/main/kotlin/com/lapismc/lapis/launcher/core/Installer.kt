@@ -21,11 +21,20 @@ abstract class Installer internal constructor(protected val metaService: MetaSer
     abstract fun verify(store: InstanceStore)
 
     /**
-     * Utility method for installing all content in a package to the instance store.
+     * Utility method for installing all content in a package to an instance store.
      * @param contentPackage Package to install.
      * @param store Instance storage to install to.
      */
     internal fun installPackageToStore(contentPackage: ContentPackage, store: InstanceStore) {
         contentPackage.forEach { it.apply(metaService, store) }
+    }
+
+    /**
+     * Utility method for verifying all content in a package is correct in an instance store.
+     * @param contentPackage Package to verify.
+     * @param store Instance storage to verify against.
+     */
+    internal fun verifyPackageInStore(contentPackage: ContentPackage, store: InstanceStore) {
+        contentPackage.forEach { it.verify(store) }
     }
 }
