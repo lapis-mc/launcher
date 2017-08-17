@@ -15,5 +15,14 @@ class ModdedInstance(minecraftVersionId: String, java: JavaConfiguration) : Inst
      * Creates an installer that can install the instance to a file system.
      * @return Installer to create the instance.
      */
-    override fun getInstaller(): Installer = TODO()
+    override fun getInstaller() = ModdedInstaller(generatePackage())
+
+    /**
+     * Constructs the package for the installer.
+     * @return Package to install the instance.
+     */
+    private fun generatePackage(): ContentPackage {
+        val builder = ContentPackage.Builder()
+        return builder.build()
+    }
 }
