@@ -1,5 +1,7 @@
 package com.lapismc.lapis.launcher.core
 
+import com.lapismc.minecraft.versioning.MetaService
+
 /**
  * References a single installation of Minecraft.
  * @param minecraftVersionId Version ID string of Minecraft.
@@ -13,9 +15,10 @@ abstract class Instance(val minecraftVersionId: String, val java: JavaConfigurat
 
     /**
      * Creates an installer that can install the instance to a file system.
+     * @param metaService Service used to retrieve files.
      * @return Installer to create the instance.
      */
-    abstract fun getInstaller(): Installer
+    abstract fun getInstaller(metaService: MetaService): Installer
 
     /**
      * Retrieves a set of worlds (save files) in the instance.

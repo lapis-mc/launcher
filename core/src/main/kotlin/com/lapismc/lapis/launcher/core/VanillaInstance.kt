@@ -1,5 +1,7 @@
 package com.lapismc.lapis.launcher.core
 
+import com.lapismc.minecraft.versioning.MetaService
+
 /**
  * References a single installation of plain, unmodified Minecraft.
  * @param minecraftVersionId Version ID string of Minecraft.
@@ -13,15 +15,17 @@ class VanillaInstance(minecraftVersionId: String, java: JavaConfiguration) : Ins
 
     /**
      * Creates an installer that can install the instance to a file system.
+     * @param metaService Service used to retrieve files.
      * @return Installer to create the instance.
      */
-    override fun getInstaller() = VanillaInstaller(generatePackage())
+    override fun getInstaller(metaService: MetaService) = VanillaInstaller(metaService, generatePackage(metaService))
 
     /**
      * Constructs the package for the installer.
+     * @param metaService Service used to retrieve files.
      * @return Package to install the instance.
      */
-    private fun generatePackage(): ContentPackage {
+    private fun generatePackage(metaService: MetaService): ContentPackage {
         val builder = ContentPackage.Builder()
         return builder.build()
     }

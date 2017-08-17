@@ -1,10 +1,13 @@
 package com.lapismc.lapis.launcher.core
 
+import com.lapismc.minecraft.versioning.MetaService
+
 /**
  * Capable of installing a modded version of Minecraft.
+ * @param metaService Service used to retrieve file content.
  * @param contentPackage Package to install.
  */
-class ModdedInstaller(contentPackage: ContentPackage) : Installer(contentPackage) {
+class ModdedInstaller(metaService: MetaService, contentPackage: ContentPackage) : Installer(metaService, contentPackage) {
     /**
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.
