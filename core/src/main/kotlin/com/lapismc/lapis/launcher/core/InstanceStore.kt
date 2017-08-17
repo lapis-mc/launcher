@@ -9,7 +9,8 @@ import java.nio.file.spi.FileSystemProvider
 abstract class InstanceStore(protected val fileSystemProvider: FileSystemProvider) {
     /**
      * Adds an asset to the storage.
-     * @param assetArg Asset information and content.
+     * @param asset Information about the asset.
+     * @param data Contents of the asset to store in the file.
      */
-    abstract fun addAsset(assetArg: AssetArg)
+    abstract fun addAsset(asset: AssetContent, data: ByteArray)
 }

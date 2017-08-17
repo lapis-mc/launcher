@@ -9,7 +9,8 @@ import java.nio.file.spi.FileSystemProvider
 class SharedInstanceStore(fileSystemProvider: FileSystemProvider) : InstanceStore(fileSystemProvider) {
     /**
      * Adds an asset to the storage.
-     * @param assetArg Asset information and content.
+     * @param asset Information about the asset.
+     * @param data Contents of the asset to store in the file.
      */
-    override fun addAsset(assetArg: AssetArg) = TODO()
+    override fun addAsset(asset: AssetContent, data: ByteArray) = TODO()
 }
