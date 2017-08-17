@@ -14,4 +14,10 @@ class StandaloneInstanceStore(fileSystemProvider: FileSystemProvider) : Instance
      * @param data Contents of the asset to store in the file.
      */
     override fun addAsset(asset: AssetContent, data: ByteArray) = TODO()
+
+    /**
+     * Verifies the contents of an asset are correct.
+     * @param asset Information about the asset.
+     */
+    override fun verifyAsset(asset: AssetContent) = TODO()
 }
