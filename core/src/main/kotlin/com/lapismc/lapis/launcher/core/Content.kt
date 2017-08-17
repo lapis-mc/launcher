@@ -1,5 +1,7 @@
 package com.lapismc.lapis.launcher.core
 
+import com.lapismc.minecraft.versioning.MetaService
+
 /**
  * Base class for all files that can be stored (downloaded) for an install.
  * This class does not contain the actual data, it contains information about it.
@@ -10,9 +12,10 @@ package com.lapismc.lapis.launcher.core
 internal abstract class Content(val name: String, val size: Int, val hash: String) {
     /**
      * Writes the content to an instance store.
+     * @param metaService Service to retrieve the file data from.
      * @param instanceStore Storage to write the file to.
      */
-    abstract fun apply(instanceStore: InstanceStore)
+    abstract fun apply(metaService: MetaService, instanceStore: InstanceStore)
 
     /**
      * Verifies that the content in the storage for this transferred file is correct.
