@@ -49,5 +49,16 @@ class ContentPackage(private val contents: List<Content>) : Collection<Content> 
          * @return Constructed content package.
          */
         fun build() = ContentPackage(contents.toList())
+
+        /**
+         * Adds an asset to the package.
+         * @param source Location of where to get the content (URL).
+         * @param size Size of the file in bytes.
+         * @param hash SHA-256 digest of the raw content.
+         */
+        fun addAsset(source: String, size: Int, hash: String) {
+            val asset = AssetContent(source, size, hash)
+            contents.add(asset)
+        }
     }
 }
