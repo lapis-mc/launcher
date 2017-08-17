@@ -1,7 +1,12 @@
 package com.lapismc.lapis.launcher.core
 
+import com.github.kittinunf.result.Result
+import com.github.kittinunf.result.flatMap
+import com.github.kittinunf.result.map
 import com.lapismc.minecraft.versioning.MetaService
 import com.lapismc.minecraft.versioning.Version
+import com.lapismc.minecraft.versioning.VersionManifest
+import com.lapismc.minecraft.versioning.VersionStub
 
 /**
  * Builds packages with content needed to install a vanilla version of Minecraft.
@@ -13,23 +18,41 @@ internal class VanillaContentPackageFactory(private val metaService: MetaService
      * @param versionId Version to generate the package for.
      * @return Package containing the content needed to run the game.
      */
-    fun build(versionId: String): ContentPackage {
-        val builder  = ContentPackage.Builder()
-        val manifest = metaService.getVersionManifest().get() // TODO: Can throw
-        val stub     = manifest.get(versionId)!! // TODO: Can throw
-        val version  = metaService.getVersion(stub).get() // TODO: Can throw
-        addAssets(version, builder)
-        return builder.build()
+    fun build(versionId: String): Result<ContentPackage, Exception> {
+        val builder = ContentPackage.Builder()
+        return metaService.getVersionManifest()
+                .flatMap { manifest -> getVersionStub(manifest, versionId) }
+                .flatMap { stub -> metaService.getVersion(stub) }
+                .flatMap { version -> addAssets(version, builder) }
+                .map     { it.build() }
+    }
+
+    /**
+     * Wraps retrieving a version stub in a result.
+     * @param manifest Version manifest to retrieve the stub from.
+     * @param versionId Unique ID of the version to retrieve a stub for.
+     * @return Result of the stub retrieval.
+     */
+    private fun getVersionStub(manifest: VersionManifest, versionId: String): Result<VersionStub, Exception> {
+        val stub = manifest.get(versionId)
+        return if(stub == null)
+            Result.Failure(IllegalArgumentException("Version $versionId does not exist"))
+        else
+            Result.Success(stub)
     }
 
     /**
      * Adds assets needed for the version of the game this instance uses.
      * @param version Minecraft version to get assets for.
      * @param builder Content package builder to add assets to.
+     * @return Result of the operation, with the same [builder] passed in.
      */
-    private fun addAssets(version: Version, builder: ContentPackage.Builder) {
-        val assetIndex = version.assetIndex
-        val assets = metaService.getAssetList(assetIndex).get() // TODO: Can throw
-        assets.forEach { builder.addAsset(it) }
+    private fun addAssets(version: Version, builder: ContentPackage.Builder): Result<ContentPackage.Builder, Exception> {
+        return metaService.getAssetList(version.assetIndex)
+                .map {
+                    assets ->
+                    assets.forEach { builder.addAsset(it) }
+                    builder
+                }
     }
 }

@@ -1,5 +1,7 @@
 package com.lapismc.lapis.launcher.core
 
+import com.github.kittinunf.result.Result
+import com.github.kittinunf.result.map
 import com.lapismc.minecraft.versioning.MetaService
 
 /**
@@ -18,9 +20,8 @@ class VanillaInstance(minecraftVersionId: String, java: JavaConfiguration) : Ins
      * @param metaService Service used to retrieve files.
      * @return Installer to create the instance.
      */
-    override fun getInstaller(metaService: MetaService): Installer {
+    override fun createInstaller(metaService: MetaService): Result<Installer, Exception> {
         val factory = VanillaContentPackageFactory(metaService)
-        val contentPackage = factory.build(minecraftVersionId)
-        return VanillaInstaller(metaService, contentPackage)
+        return factory.build(minecraftVersionId).map { VanillaInstaller(metaService, it) }
     }
 }

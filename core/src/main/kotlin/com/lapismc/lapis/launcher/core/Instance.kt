@@ -1,5 +1,6 @@
 package com.lapismc.lapis.launcher.core
 
+import com.github.kittinunf.result.Result
 import com.lapismc.minecraft.versioning.MetaService
 
 /**
@@ -16,9 +17,9 @@ abstract class Instance(val minecraftVersionId: String, val java: JavaConfigurat
     /**
      * Creates an installer that can install the instance to a file system.
      * @param metaService Service used to retrieve files.
-     * @return Installer to create the instance.
+     * @return Result of the installer creation.
      */
-    abstract fun getInstaller(metaService: MetaService): Installer
+    abstract fun createInstaller(metaService: MetaService): Result<Installer, Exception>
 
     /**
      * Retrieves a set of worlds (save files) in the instance.

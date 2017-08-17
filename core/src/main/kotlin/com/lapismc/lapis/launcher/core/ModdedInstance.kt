@@ -1,5 +1,6 @@
 package com.lapismc.lapis.launcher.core
 
+import com.github.kittinunf.result.Result
 import com.lapismc.minecraft.versioning.MetaService
 
 /**
@@ -18,7 +19,7 @@ class ModdedInstance(minecraftVersionId: String, java: JavaConfiguration) : Inst
      * @param metaService Service used to retrieve files.
      * @return Installer to create the instance.
      */
-    override fun getInstaller(metaService: MetaService): Installer = ModdedInstaller(metaService, generatePackage(metaService))
+    override fun createInstaller(metaService: MetaService): Result<Installer, Exception> = Result.Success(ModdedInstaller(metaService, generatePackage(metaService)))
 
     /**
      * Constructs the package for the installer.
