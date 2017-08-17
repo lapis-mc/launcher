@@ -1,5 +1,7 @@
 package com.lapismc.lapis.launcher.core
 
+import com.lapismc.minecraft.versioning.Asset
+
 /**
  * Collection of content that is needed for an instance to run.
  * @param contents List of content in the package.
@@ -52,13 +54,11 @@ internal class ContentPackage(private val contents: List<Content>) : Collection<
 
         /**
          * Adds an asset to the package.
-         * @param source Location of where to get the content (URL).
-         * @param size Size of the file in bytes.
-         * @param hash SHA-256 digest of the raw content.
+         * @param asset Information about the asset to add.
          */
-        fun addAsset(source: String, size: Int, hash: String) {
-            val asset = AssetContent(source, size, hash)
-            contents.add(asset)
+        fun addAsset(asset: Asset) {
+            val content = AssetContent(asset.path, asset.size, asset.hash)
+            contents.add(content)
         }
     }
 }

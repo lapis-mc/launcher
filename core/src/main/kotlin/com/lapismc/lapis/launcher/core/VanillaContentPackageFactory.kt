@@ -30,6 +30,6 @@ internal class VanillaContentPackageFactory(private val metaService: MetaService
     private fun addAssets(version: Version, builder: ContentPackage.Builder) {
         val assetIndex = version.assetIndex
         val assets = metaService.getAssetList(assetIndex).get() // TODO: Can throw
-        assets.forEach { builder.addAsset(it.path, it.size, it.hash) }
+        assets.forEach { builder.addAsset(it) }
     }
 }
