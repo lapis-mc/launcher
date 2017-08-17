@@ -2,6 +2,7 @@ package com.lapismc.lapis.launcher.core
 
 import com.lapismc.minecraft.versioning.OSType
 import oshi.SystemInfo
+import java.nio.file.Paths
 
 /**
  * Information about a version of Java installed on the system.
@@ -21,17 +22,26 @@ data class SystemJava(val version: String, val path: String, val is64bit: Boolea
             val is64bit = System.getProperty("os.arch").endsWith("64")
             return SystemJava(version, path, is64bit)
         }
-    }
 
-    /**
-     * Bytes in a gigabyte, used to syntactical conversion.
-     */
-    private val GB = (1024 * 1024 * 1024).toLong()
+        /**
+         * Gets the name of the Java executable for the current operating system.
+         * @return Java program name.
+         */
+        private fun javaProgramName() = when(OSType.current) {
+            OSType.WINDOWS -> "java.exe"
+            else -> "java"
+        }
+
+        /**
+         * Bytes in a gigabyte, used to syntactical conversion.
+         */
+        private val GB = (1024L * 1024L * 1024L)
+    }
 
     /**
      * Path to the executable to run Java.
      */
-    val executable: String = TODO()
+    val executable = Paths.get(path, "bin", javaProgramName()).toString()
 
     /**
      * Calculates the maximum amount of memory this installation of Java can use.
