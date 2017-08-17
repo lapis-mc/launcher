@@ -13,13 +13,13 @@ internal abstract class Content(val name: String, val size: Int, val hash: Strin
     /**
      * Writes the content to an instance store.
      * @param metaService Service to retrieve the file data from.
-     * @param instanceStore Storage to write the file to.
+     * @param store Storage to write the file to.
      */
-    abstract fun apply(metaService: MetaService, instanceStore: InstanceStore)
+    abstract fun apply(metaService: MetaService, store: InstanceStore)
 
     /**
      * Verifies that the content in the storage for this transferred file is correct.
-     * @param instanceStore Storage to check in.
+     * @param store Storage to check in.
      */
-    abstract fun verify(instanceStore: InstanceStore)
+    abstract fun verify(store: InstanceStore)
 }

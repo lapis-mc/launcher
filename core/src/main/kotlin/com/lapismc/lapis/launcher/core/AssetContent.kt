@@ -1,5 +1,6 @@
 package com.lapismc.lapis.launcher.core
 
+import com.lapismc.minecraft.versioning.Asset
 import com.lapismc.minecraft.versioning.MetaService
 
 /**
@@ -12,13 +13,19 @@ internal class AssetContent(name: String, size: Int, hash: String) : Content(nam
     /**
      * Writes the content to an instance store.
      * @param metaService Service to retrieve the file data from.
-     * @param instanceStore Storage to write the file to.
+     * @param store Storage to write the file to.
      */
-    override fun apply(metaService: MetaService, instanceStore: InstanceStore) = TODO()
+    override fun apply(metaService: MetaService, store: InstanceStore) {
+        val asset = Asset(name, hash, size)
+        val data = metaService.getAssetContent(asset).get() // TODO: Can throw
+        store.addAsset(this, data)
+    }
 
     /**
      * Verifies that the content in the storage for this transferred file is correct.
-     * @param instanceStore Storage to check in.
+     * @param store Storage to check in.
      */
-    override fun verify(instanceStore: InstanceStore) = TODO()
+    override fun verify(store: InstanceStore) {
+        store.verifyAsset(this)
+    }
 }
