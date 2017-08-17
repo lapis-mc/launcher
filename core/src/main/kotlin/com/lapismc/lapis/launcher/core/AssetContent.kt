@@ -6,16 +6,16 @@ package com.lapismc.lapis.launcher.core
  * @param size Size of the file in bytes.
  * @param hash SHA-256 digest of the raw content.
  */
-abstract class AssetContent(val source: String, val size: Int, val hash: String) {
+class AssetContent(source: String, size: Int, hash: String) : Content(source, size, hash) {
     /**
      * Writes the content to an instance store.
      * @param instanceStore Storage to write the file to.
      */
-    abstract fun apply(instanceStore: InstanceStore)
+    override fun apply(instanceStore: InstanceStore) = TODO()
 
     /**
      * Verifies that the content in the storage for this transferred file is correct.
      * @param instanceStore Storage to check in.
      */
-    abstract fun verify(instanceStore: InstanceStore)
+    override fun verify(instanceStore: InstanceStore) = TODO()
 }
