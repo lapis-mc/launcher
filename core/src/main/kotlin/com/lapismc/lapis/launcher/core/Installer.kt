@@ -6,9 +6,8 @@ import com.lapismc.minecraft.versioning.MetaService
  * Base class for all types of game installers.
  * Sub-classes are responsible for details of installing their type of Minecraft.
  * @param metaService Service used to retrieve file content.
- * @param contentPackage Package to install.
  */
-abstract class Installer internal constructor(protected val metaService: MetaService, protected val contentPackage: ContentPackage) {
+abstract class Installer internal constructor(protected val metaService: MetaService) {
     /**
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.
@@ -20,4 +19,13 @@ abstract class Installer internal constructor(protected val metaService: MetaSer
      * @param store Instance storage to install to.
      */
     abstract fun verify(store: InstanceStore)
+
+    /**
+     * Utility method for installing all content in a package to the instance store.
+     * @param contentPackage Package to install.
+     * @param store Instance storage to install to.
+     */
+    internal fun installPackageToStore(contentPackage: ContentPackage, store: InstanceStore) {
+        contentPackage.forEach { it.apply(metaService, store) }
+    }
 }
