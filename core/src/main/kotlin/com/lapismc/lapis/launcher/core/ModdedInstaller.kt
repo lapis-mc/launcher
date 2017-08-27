@@ -13,14 +13,15 @@ internal class ModdedInstaller(metaService: MetaService, private val contentPack
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.
      * @return Result of the installation.
-     *  If the install is successful, then information about it is returned.
-     *  If the install failed, then the problems are returned.
+     *  Upon success, an instance is returned.
      */
     override fun install(store: InstanceStore): Result<InstalledInstance, Exception> = TODO()
 
     /**
      * Checks that the package is properly installed to the instance storage.
      * @param store Instance storage to install to.
+     * @return Result of the verification.
+     *  If any problems were found, the result will be a failure.
      */
     override fun verify(store: InstanceStore): Result<InstalledInstance, Exception> = TODO()
 }

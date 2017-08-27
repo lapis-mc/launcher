@@ -13,12 +13,16 @@ abstract class Installer internal constructor(protected val metaService: MetaSer
     /**
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.
+     * @return Result of the installation.
+     *  Upon success, an instance is returned.
      */
     abstract fun install(store: InstanceStore): Result<InstalledInstance, Exception>
 
     /**
      * Checks that the package is properly installed to the instance storage.
      * @param store Instance storage to install to.
+     * @return Result of the verification.
+     *  If any problems were found, the result will be a failure.
      */
     abstract fun verify(store: InstanceStore): Result<InstalledInstance, Exception>
 

@@ -13,6 +13,8 @@ internal class VanillaInstaller(metaService: MetaService, private val contentPac
     /**
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.
+     * @return Result of the installation.
+     *  Upon success, an instance is returned.
      */
     override fun install(store: InstanceStore): Result<InstalledInstance, Exception> {
         val validation = installPackageToStore(contentPackage, store)
@@ -30,6 +32,8 @@ internal class VanillaInstaller(metaService: MetaService, private val contentPac
     /**
      * Checks that the package is properly installed to the instance storage.
      * @param store Instance storage to install to.
+     * @return Result of the verification.
+     *  If any problems were found, the result will be a failure.
      */
     override fun verify(store: InstanceStore): Result<InstalledInstance, Exception> = TODO()
 }
