@@ -1,5 +1,7 @@
 package com.lapismc.lapis.launcher.core
 
+import com.github.kittinunf.result.Result
+import com.github.kittinunf.result.Validation
 import com.lapismc.minecraft.versioning.MetaService
 
 /**
@@ -12,13 +14,13 @@ abstract class Installer internal constructor(protected val metaService: MetaSer
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.
      */
-    abstract fun install(store: InstanceStore): InstallResult
+    abstract fun install(store: InstanceStore): Result<InstalledInstance, Exception>
 
     /**
      * Checks that the package is properly installed to the instance storage.
      * @param store Instance storage to install to.
      */
-    abstract fun verify(store: InstanceStore): InstallResult
+    abstract fun verify(store: InstanceStore): Result<InstalledInstance, Exception>
 
     /**
      * Utility method for installing all content in a package to an instance store.
@@ -26,24 +28,29 @@ abstract class Installer internal constructor(protected val metaService: MetaSer
      * @param store Instance storage to install to.
      * @return Installation results.
      */
-    internal fun installPackageToStore(contentPackage: ContentPackage, store: InstanceStore): InstallResult {
-        val errors = ArrayList<Exception>()
-        contentPackage.forEach {
-            try {
+    internal fun installPackageToStore(contentPackage: ContentPackage, store: InstanceStore): Validation<Exception> {
+        val results = contentPackage.map {
+            Result.of {
                 it.apply(metaService, store)
-            } catch(e: Exception) {
-                errors.add(e)
+                true // Placeholder value to store in Result instance.
             }
-        }
-        return InstallResult(errors.toList())
+        }.toTypedArray()
+        return Validation(*results)
     }
 
     /**
      * Utility method for verifying all content in a package is correct in an instance store.
      * @param contentPackage Package to verify.
      * @param store Instance storage to verify against.
+     * @return Verification results.
      */
-    internal fun verifyPackageInStore(contentPackage: ContentPackage, store: InstanceStore) {
-        contentPackage.forEach { it.verify(store) }
+    internal fun verifyPackageInStore(contentPackage: ContentPackage, store: InstanceStore): Validation<Exception> {
+        val results = contentPackage.map {
+            Result.of {
+                it.verify(store)
+                true // Placeholder value to use for Result instance.
+            }
+        }.toTypedArray()
+        return Validation(*results)
     }
 }
