@@ -18,8 +18,8 @@ internal class VanillaContentPackageFactory(private val metaService: MetaService
      * @param versionId Version to generate the package for.
      * @return Package containing the content needed to run the game.
      */
-    fun build(versionId: String): Result<ContentPackage, Exception> {
-        val builder = ContentPackage.Builder()
+    fun build(versionId: String): Result<Bundle, Exception> {
+        val builder = Bundle.Builder()
         return metaService.getVersionManifest()
                 .flatMap { manifest -> getVersionStub(manifest, versionId) }
                 .flatMap { stub -> metaService.getVersion(stub) }
@@ -47,7 +47,7 @@ internal class VanillaContentPackageFactory(private val metaService: MetaService
      * @param builder Content package builder to add assets to.
      * @return Result of the operation, with the same [builder] passed in.
      */
-    private fun addAssets(version: Version, builder: ContentPackage.Builder): Result<ContentPackage.Builder, Exception> {
+    private fun addAssets(version: Version, builder: Bundle.Builder): Result<Bundle.Builder, Exception> {
         return metaService.getAssetList(version.assetIndex)
                 .map {
                     assets ->

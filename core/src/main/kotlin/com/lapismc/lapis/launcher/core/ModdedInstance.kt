@@ -26,8 +26,8 @@ class ModdedInstance(minecraftVersionId: String, javaConfiguration: JavaConfigur
      * @param metaService Service used to retrieve files.
      * @return Package to install the instance.
      */
-    private fun generatePackage(metaService: MetaService): ContentPackage {
-        val builder = ContentPackage.Builder()
+    private fun generatePackage(metaService: MetaService): Bundle {
+        val builder = Bundle.Builder()
         return builder.build()
     }
 }

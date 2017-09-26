@@ -6,9 +6,9 @@ import com.lapismc.minecraft.versioning.MetaService
 /**
  * Capable of installing a modded version of Minecraft.
  * @param metaService Service used to retrieve file content.
- * @param contentPackage Package to install.
+ * @param bundle Package to install.
  */
-internal class ModdedInstaller(metaService: MetaService, private val contentPackage: ContentPackage) : Installer(metaService) {
+internal class ModdedInstaller(metaService: MetaService, private val bundle: Bundle) : Installer(metaService) {
     /**
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.

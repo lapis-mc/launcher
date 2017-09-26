@@ -7,9 +7,9 @@ import com.lapismc.minecraft.versioning.MetaService
  * Base class for all types of game installers.
  * Sub-classes are responsible for details of installing their type of Minecraft.
  * @param metaService Service used to retrieve file content.
- * @param contentPackage Package containing the vanilla content.
+ * @param bundle Package containing the vanilla content.
  */
-internal class VanillaInstaller(metaService: MetaService, private val contentPackage: ContentPackage) : Installer(metaService) {
+internal class VanillaInstaller(metaService: MetaService, private val bundle: Bundle) : Installer(metaService) {
     /**
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.
@@ -17,7 +17,7 @@ internal class VanillaInstaller(metaService: MetaService, private val contentPac
      *  Upon success, an instance is returned.
      */
     override fun install(store: InstanceStore): Result<InstalledInstance, Exception> {
-        val validation = installPackageToStore(contentPackage, store)
+        val validation = installPackageToStore(bundle, store)
         return if(validation.hasFailure)
             Result.Failure(validation.failures.first())
         else
