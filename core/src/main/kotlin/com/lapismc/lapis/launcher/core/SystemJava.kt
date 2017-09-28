@@ -13,29 +13,30 @@ import java.nio.file.Paths
 data class SystemJava(val version: String, val path: String, val is64bit: Boolean) {
     companion object {
         /**
-         * Retrieves the running Java version.
-         * @return Information about the Java running this program.
-         */
-        fun current(): SystemJava {
-            val version = System.getProperty("java.runtime.version")
-            val path    = System.getProperty("java.home")
-            val is64bit = System.getProperty("os.arch").endsWith("64")
-            return SystemJava(version, path, is64bit)
-        }
-
-        /**
-         * Gets the name of the Java executable for the current operating system.
+         * Gets the name of the Java executable for an operating system.
+         * @param osType Type of operating system to get the executable name for.
          * @return Java program name.
          */
-        private fun javaProgramName() = when(OSType.current) {
+        private fun javaProgramName(osType: OSType = OSType.current) = when(osType) {
             OSType.WINDOWS -> "java.exe"
             else -> "java"
         }
 
         /**
-         * Bytes in a gigabyte, used to syntactical conversion.
+         * Recommended maximum heap memory Java should use for a 32-bit environment.
+         * @param osType Type of operating system to get the memory for.
+         * @return Memory size in bytes.
          */
-        private val GB = (1024L * 1024L * 1024L)
+        private fun osMaxHeap(osType: OSType = OSType.current) = when(osType) {
+            OSType.LINUX   -> 3 * GB
+            OSType.OSX     -> 4 * GB
+            OSType.WINDOWS -> 2 * GB
+        }
+
+        /**
+         * Bytes in a gigabyte, used for syntactical conversion.
+         */
+        private const val GB = (1024L * 1024L * 1024L)
     }
 
     /**
@@ -54,15 +55,5 @@ data class SystemJava(val version: String, val path: String, val is64bit: Boolea
             totalSysMemory
         else
             Math.min(totalSysMemory, osMaxHeap())
-    }
-
-    /**
-     * Recommended maximum memory Java should use for a 32-bit environment.
-     * @return Memory size in bytes.
-     */
-    private fun osMaxHeap() = when(OSType.current) {
-        OSType.LINUX   -> 3 * GB
-        OSType.OSX     -> 4 * GB
-        OSType.WINDOWS -> 2 * GB
     }
 }
