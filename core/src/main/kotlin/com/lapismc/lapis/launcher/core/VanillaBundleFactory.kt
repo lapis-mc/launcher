@@ -12,7 +12,7 @@ import com.lapismc.minecraft.versioning.VersionStub
  * Builds packages with content needed to install a vanilla version of Minecraft.
  * @param metaService Service used to retrieve the content.
  */
-internal class VanillaContentPackageFactory(private val metaService: MetaService) {
+internal class VanillaBundleFactory(private val metaService: MetaService) {
     /**
      * Creates a content package for the specified version.
      * @param versionId Version to generate the package for.

@@ -21,7 +21,7 @@ class VanillaInstance(minecraftVersionId: String, javaConfiguration: JavaConfigu
      * @return Installer to create the instance.
      */
     override fun createInstaller(metaService: MetaService): Result<Installer, Exception> {
-        val factory = VanillaContentPackageFactory(metaService)
+        val factory = VanillaBundleFactory(metaService)
         return factory.build(minecraftVersionId).map { VanillaInstaller(metaService, it) }
     }
 }
