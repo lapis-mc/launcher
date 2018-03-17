@@ -23,7 +23,7 @@ internal class VanillaInstaller(metaService: MetaService, private val bundle: Bu
         else
         {
             // TODO: Get Java and instance information.
-            val java = JavaConfiguration(SystemJava.current(), 0, 0, listOf())
+            val java = JavaConfiguration(JavaLocator.current(), 0, 0, listOf())
             val instance = VanillaInstance("TODO", java)
             Result.Success(InstalledInstance(instance, store))
         }

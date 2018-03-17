@@ -9,7 +9,7 @@ class JavaLocator {
          * Retrieves the running Java version.
          * @return Information about the Java running this program.
          */
-        private fun current(): SystemJava {
+        fun current(): SystemJava {
             val version = System.getProperty("java.runtime.version")
             val path    = System.getProperty("java.home")
             val is64bit = System.getProperty("os.arch").endsWith("64")
