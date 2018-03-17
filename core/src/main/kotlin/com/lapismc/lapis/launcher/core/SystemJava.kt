@@ -17,7 +17,7 @@ data class SystemJava(val version: String, val path: String, val is64bit: Boolea
          * @param osType Type of operating system to get the executable name for.
          * @return Java program name.
          */
-        private fun javaProgramName(osType: OSType = OSType.current) = when(osType) {
+        private fun executableName(osType: OSType = OSType.current) = when(osType) {
             OSType.WINDOWS -> "java.exe"
             else -> "java"
         }
@@ -42,7 +42,7 @@ data class SystemJava(val version: String, val path: String, val is64bit: Boolea
     /**
      * Path to the executable to run Java.
      */
-    val executable = Paths.get(path, "bin", javaProgramName()).toString()
+    val executablePath = Paths.get(path, "bin", executableName()).toString()
 
     /**
      * Calculates the maximum amount of memory this installation of Java can use.
