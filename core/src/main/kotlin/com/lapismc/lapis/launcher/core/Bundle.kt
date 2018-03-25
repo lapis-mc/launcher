@@ -6,7 +6,8 @@ import com.lapismc.minecraft.versioning.Asset
  * Collection of content that is needed for an instance to run.
  * @param contents List of content in the package.
  */
-internal class Bundle(private val contents: List<Content>) : Collection<Content> {
+internal class Bundle(private val contents: List<Content>)
+    : Collection<Content> {
     /**
      * Number of items in the package.
      */

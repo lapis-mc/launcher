@@ -9,7 +9,8 @@ import java.nio.file.spi.FileSystemProvider
  * @param fileSystemProvider Provides access to where the instances are stored to and retrieved from.
  * @param rootPath Path in the file system to use as a root.
  */
-class StandaloneInstanceStore(fileSystemProvider: FileSystemProvider, rootPath: Path) : InstanceStore(fileSystemProvider, rootPath) {
+class StandaloneInstanceStore(fileSystemProvider: FileSystemProvider, rootPath: Path)
+    : InstanceStore(fileSystemProvider, rootPath) {
     /**
      * Adds an asset to the storage.
      * @param asset Information about the asset.

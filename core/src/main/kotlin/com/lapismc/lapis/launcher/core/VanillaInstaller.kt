@@ -9,7 +9,8 @@ import com.lapismc.minecraft.versioning.MetaService
  * @param metaService Service used to retrieve file content.
  * @param bundle Package containing the vanilla content.
  */
-internal class VanillaInstaller(metaService: MetaService, private val bundle: Bundle) : Installer(metaService) {
+internal class VanillaInstaller(metaService: MetaService, private val bundle: Bundle)
+    : Installer(metaService) {
     /**
      * Performs the installation of an instance to a store.
      * @param store Instance storage to install to.

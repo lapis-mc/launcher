@@ -9,7 +9,8 @@ import com.lapismc.minecraft.versioning.MetaService
  * @param minecraftVersionId Version ID string of Minecraft.
  * @param javaConfiguration Java configuration used to launch the game.
  */
-class VanillaInstance(minecraftVersionId: String, javaConfiguration: JavaConfiguration) : Instance(minecraftVersionId, javaConfiguration) {
+class VanillaInstance(minecraftVersionId: String, javaConfiguration: JavaConfiguration)
+    : Instance(minecraftVersionId, javaConfiguration) {
     /**
      * Indicates whether the instance uses mods.
      */
