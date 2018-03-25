@@ -12,21 +12,21 @@ import com.lapismc.minecraft.versioning.MetaService
 internal class VanillaInstaller(metaService: MetaService, private val bundle: Bundle)
     : Installer(metaService) {
     /**
-     * Performs the installation of an instance to a store.
-     * @param store Instance storage to install to.
+     * Performs the installation of an image to a store.
+     * @param store Image storage to install to.
      * @return Result of the installation.
      *  Upon success, an instance is returned.
      */
-    override fun install(store: InstanceStore): Result<InstalledInstance, Exception> {
+    override fun install(store: InstanceStore): Result<Instance, Exception> {
         val validation = installPackageToStore(bundle, store)
         return if(validation.hasFailure)
             Result.Failure(validation.failures.first())
         else
         {
-            // TODO: Get Java and instance information.
-            val java = JavaConfiguration(JavaLocator.current(), 0, 0, listOf())
-            val instance = VanillaInstance("TODO", java)
-            Result.Success(InstalledInstance(instance, store))
+            // TODO: Get Java and image information.
+            val java  = JavaConfiguration(JavaLocator.current(), 0, 0, listOf())
+            val image = VanillaImage("TODO", java)
+            Result.Success(Instance(image, store))
         }
     }
 
@@ -36,5 +36,5 @@ internal class VanillaInstaller(metaService: MetaService, private val bundle: Bu
      * @return Result of the verification.
      *  If any problems were found, the result will be a failure.
      */
-    override fun verify(store: InstanceStore): Result<InstalledInstance, Exception> = TODO()
+    override fun verify(store: InstanceStore): Result<Instance, Exception> = TODO()
 }

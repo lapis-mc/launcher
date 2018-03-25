@@ -1,39 +1,22 @@
 package com.lapismc.lapis.launcher.core
 
-import com.github.kittinunf.result.Result
-import com.lapismc.minecraft.versioning.MetaService
-
 /**
- * References a single installation of Minecraft.
- * @param minecraftVersionId Version ID string of Minecraft.
- * @param javaConfiguration Java configuration used to launch the game.
+ * Reference to an image that has been installed.
+ * @param image Image that is installed.
+ * @param store Storage where the instance is installed.
  */
-abstract class Instance(val minecraftVersionId: String, val javaConfiguration: JavaConfiguration) {
-    /**
-     * Indicates whether the instance uses mods.
-     */
-    abstract val isModded: Boolean
-
-    /**
-     * Creates an installer that can install the instance to a file system.
-     * @param metaService Service used to retrieve files.
-     * @return Result of the installer creation.
-     */
-    abstract fun createInstaller(metaService: MetaService): Result<Installer, Exception>
-
+class Instance(val image: Image, val store: InstanceStore) {
     /**
      * Retrieves a set of worlds (save files) in the instance.
-     * @param store File storage to inspect for save files.
      * @return Set of saved worlds.
      * @todo To be implemented in a later version.
      */
-    fun getSavedWorlds(store: InstanceStore): Unit = TODO("To be implemented in a later version")
+    val savedWorlds: Unit = TODO("To be implemented in a later version")
 
     /**
      * Retrieves a set of screenshots in the instance.
-     * @param store File storage to inspect for screenshots.
      * @return Set of screenshots.
      * @todo To be implemented in a later version.
      */
-    fun getScreenshots(store: InstanceStore): Unit = TODO("To be implemented in a later version")
+    val screenshots: Unit = TODO("To be implemented in a later version")
 }
