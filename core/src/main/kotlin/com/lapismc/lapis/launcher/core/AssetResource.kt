@@ -9,8 +9,8 @@ import com.lapismc.minecraft.versioning.MetaService
  * @param size Size of the file in bytes.
  * @param hash SHA-256 digest of the raw content.
  */
-internal class AssetContent(name: String, size: Int, hash: String)
-    : Content(name, size, hash) {
+internal class AssetResource(name: String, size: Int, hash: String)
+    : Resource(name, size, hash) {
     /**
      * Writes the content to an instance store.
      * @param metaService Service to retrieve the file data from.

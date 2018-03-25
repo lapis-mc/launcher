@@ -6,8 +6,8 @@ import com.lapismc.minecraft.versioning.Asset
  * Collection of content that is needed for an instance to run.
  * @param contents List of content in the package.
  */
-internal class Bundle(private val contents: List<Content>)
-    : Collection<Content> {
+internal class Bundle(private val contents: List<Resource>)
+    : Collection<Resource> {
     /**
      * Number of items in the package.
      */
@@ -15,18 +15,18 @@ internal class Bundle(private val contents: List<Content>)
 
     /**
      * Checks if the specified content is contained in this package.
-     * @param element Content to look for.
+     * @param element Resource to look for.
      * @return True if the package contains the specified content, false otherwise.
      */
-    override fun contains(element: Content) = contents.contains(element)
+    override fun contains(element: Resource) = contents.contains(element)
 
     /**
      * Checks if all content in the specified collection are contained in this package.
-     * @param elements Content to look for.
+     * @param elements Resource to look for.
      * @return True if the package contains everything from [elements],
      *  or false if at least one is missing.
      */
-    override fun containsAll(elements: Collection<Content>) = contents.containsAll(elements)
+    override fun containsAll(elements: Collection<Resource>) = contents.containsAll(elements)
 
     /**
      * Checks whether the package has content in it.
@@ -37,15 +37,15 @@ internal class Bundle(private val contents: List<Content>)
 
     /**
      * Creates an iterator that can be used to retrieve each piece of content.
-     * @return Content iterator.
+     * @return Resource iterator.
      */
-    override fun iterator(): Iterator<Content> = contents.stream().iterator()
+    override fun iterator(): Iterator<Resource> = contents.stream().iterator()
 
     /**
      * Helps build a content package.
      */
     class Builder {
-        private val contents = ArrayList<Content>()
+        private val contents = ArrayList<Resource>()
 
         /**
          * Creates the package.
@@ -58,7 +58,7 @@ internal class Bundle(private val contents: List<Content>)
          * @param asset Information about the asset to add.
          */
         fun addAsset(asset: Asset) {
-            val content = AssetContent(asset.path, asset.size, asset.hash)
+            val content = AssetResource(asset.path, asset.size, asset.hash)
             contents.add(content)
         }
     }

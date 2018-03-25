@@ -14,11 +14,11 @@ abstract class InstanceStore(protected val fileSystemProvider: FileSystemProvide
      * @param asset Information about the asset.
      * @param data Contents of the asset to store in the file.
      */
-    internal abstract fun addAsset(asset: AssetContent, data: ByteArray)
+    internal abstract fun addAsset(asset: AssetResource, data: ByteArray)
 
     /**
      * Verifies the contents of an asset are correct.
      * @param asset Information about the asset.
      */
-    internal abstract fun verifyAsset(asset: AssetContent)
+    internal abstract fun verifyAsset(asset: AssetResource)
 }

@@ -44,7 +44,7 @@ internal class VanillaBundleFactory(private val metaService: MetaService) {
     /**
      * Adds assets needed for the version of the game this instance uses.
      * @param version Minecraft version to get assets for.
-     * @param builder Content package builder to add assets to.
+     * @param builder Resource package builder to add assets to.
      * @return Result of the operation, with the same [builder] passed in.
      */
     private fun addAssets(version: Version, builder: Bundle.Builder): Result<Bundle.Builder, Exception> {

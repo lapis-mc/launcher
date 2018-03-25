@@ -9,7 +9,7 @@ import com.lapismc.minecraft.versioning.MetaService
  * @param size Size of the file in bytes.
  * @param hash SHA-256 digest of the raw content.
  */
-internal abstract class Content(val name: String, val size: Int, val hash: String) {
+internal abstract class Resource(val name: String, val size: Int, val hash: String) {
     /**
      * Writes the content to an instance store.
      * @param metaService Service to retrieve the file data from.
