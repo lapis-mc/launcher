@@ -25,8 +25,8 @@ internal class VanillaInstaller(metaService: MetaService, private val bundle: Bu
         {
             // TODO: Get Java and image information.
             val java  = JavaConfiguration(JavaLocator.current(), 0, 0, listOf())
-            val image = VanillaImage("TODO", java)
-            Result.Success(Instance(image, store))
+            val image = VanillaImage("TODO")
+            Result.Success(Instance(image, store, java))
         }
     }
 

@@ -7,10 +7,9 @@ import com.lapismc.minecraft.versioning.MetaService
 /**
  * References a single image of plain, unmodified Minecraft.
  * @param minecraftVersionId Version ID string of Minecraft.
- * @param javaConfiguration Java configuration used to launch the game.
  */
-class VanillaImage(minecraftVersionId: String, javaConfiguration: JavaConfiguration)
-    : Image(minecraftVersionId, javaConfiguration) {
+class VanillaImage(minecraftVersionId: String)
+    : Image(minecraftVersionId) {
     /**
      * Indicates whether the image uses mods.
      */

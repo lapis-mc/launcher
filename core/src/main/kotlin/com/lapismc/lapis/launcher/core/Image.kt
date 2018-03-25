@@ -6,9 +6,8 @@ import com.lapismc.minecraft.versioning.MetaService
 /**
  * References a single installation of Minecraft.
  * @param minecraftVersionId Version ID string of Minecraft.
- * @param javaConfiguration Java configuration used to launch the game.
  */
-abstract class Image(val minecraftVersionId: String, val javaConfiguration: JavaConfiguration) {
+abstract class Image(val minecraftVersionId: String) {
     /**
      * Indicates whether the image uses mods.
      */
