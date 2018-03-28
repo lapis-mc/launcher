@@ -25,7 +25,7 @@ data class SystemJava(val version: String, val path: String, val is64bit: Boolea
         /**
          * Recommended maximum heap memory Java should use for a 32-bit environment.
          * @param osType Type of operating system to get the memory for.
-         * @return Memory size in bytes.
+         * @return Memory size in megabytes.
          */
         private fun osMaxHeap(osType: OSType = OSType.current) = when(osType) {
             OSType.LINUX   -> 3 * GB
@@ -34,9 +34,14 @@ data class SystemJava(val version: String, val path: String, val is64bit: Boolea
         }
 
         /**
-         * Bytes in a gigabyte, used for syntactical conversion.
+         * Megabytes in a gigabyte, used for syntactical conversion.
          */
-        private const val GB = (1024L * 1024L * 1024L)
+        private const val GB = 1024
+
+        /**
+         * Number of bytes in a megabyte.
+         */
+        private const val bytesPerMegabyte = 1024L * 1024L
     }
 
     /**
@@ -46,11 +51,11 @@ data class SystemJava(val version: String, val path: String, val is64bit: Boolea
 
     /**
      * Calculates the maximum amount of memory this installation of Java can use.
-     * @return Memory size in bytes.
+     * @return Memory size in megabytes.
      */
-    fun maximumPossibleMemory(): Long {
+    fun maximumPossibleMemory(): Int {
         val sysInfo = SystemInfo()
-        val totalSysMemory = sysInfo.hardware.memory.total
+        val totalSysMemory = (sysInfo.hardware.memory.total / bytesPerMegabyte).toInt()
         return if(is64bit && sysInfo.hardware.processor.isCpu64bit)
             totalSysMemory
         else
